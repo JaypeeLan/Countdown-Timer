@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Countdown</title>
+    <link
+      rel="icon"
+      type="image/jpg"
+      href="https://as1.ftcdn.net/v2/jpg/02/01/99/18/1000_F_201991824_OFMztKVPYT4w1XF6LKECTgdF029fGZUU.jpg"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- video bg -->
+    <video src="time.mp4" class="video-background" loop muted autoplay></video>
+    <div class="video-overlay"></div>
+
+    <!-- container -->
+    <div class="container">
+      <!-- input -->
+      <div class="input-container" id="input-container">
+        <h1>Create a Custom Countdown</h1>
+        <form action="" class="form" id="countdownForm">
+          <label for="title">Title</label>
+          <input type="text" id="title" placeholder="countdown to?.." />
+
+          <label for="date-picker">Select a date</label>
+          <input type="date" id="date-picker" />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <!-- countdown -->
+      <div class="countdown" id="countdown" hidden>
+        <h1 id="countdown-title">Countdown Title Here</h1>
+        <ul>
+          <li><span>3</span>Days</li>
+          <li><span>6</span>Hours</li>
+          <li><span>45</span>Minutes</li>
+          <li><span>3</span>Seconds</li>
+        </ul>
+        <button id="countdown-button">Reset</button>
+      </div>
+
+      <!-- compelte -->
+      <div class="complete" id="complete" hidden>
+        <h1 class="complete-title">Countdown Complete</h1>
+        <h1 id="complete-info">Countdown Finished on 05-02-2023</h1>
+        <button id="complete-button">New countdown</button>
+      </div>
+    </div>
+    <!-- Script -->
+    <script src="script.js"></script>
+    s
+  </body>
+</html>
