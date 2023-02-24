@@ -16,6 +16,7 @@ let countdownTitle = "";
 let countdownDate = "";
 let countdownValue = Date;
 let countdownActive;
+let savedCountdown;
 
 const second = 1000; // 1 second = 1000 millisecs
 const minute = second * 60; // get minutes ins millisecs
@@ -76,6 +77,12 @@ const updateCountdown = (e) => {
   countdownTitle = e.srcElement[0].value;
   countdownDate = e.srcElement[1].value;
 
+  savedCountdown = {
+    title: countdownTitle,
+    date: countdownDate,
+  };
+  localStorage.setItem("countdown", JSON.stringify(savedCountdown));
+
   // Get number of version of current Date since 190 jan 1 in millisecs to this sec while checking for valid date
 
   if (countdownDate === "") {
@@ -99,9 +106,24 @@ const reset = () => {
   // reset values
   countdownTitle = " ";
   countdownDate = "";
+  localStorage.removeItem("countdown");
+};
+
+const restorePreviousCountdown = () => {
+  if (localStorage.getItem("countdown")) {
+    inputContainer.hidden = true;
+    savedCountdown = JSON.parse(localStorage.getItem("countdown"));
+    countdownTitle = savedCountdown.title;
+    countdownDate = savedCountdown.date;
+    countdownValue = new Date(countdownDate).getTime();
+    updateDom();
+  }
 };
 
 // Event Listeners
 countdownForm.addEventListener("submit", updateCountdown);
 countdownBtn.addEventListener("click", reset);
 completeBtn.addEventListener("click", reset);
+
+// on page load, check local storage
+restorePreviousCountdown();
