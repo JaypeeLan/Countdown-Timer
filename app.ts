@@ -1,29 +1,43 @@
-const inputContainer = document.getElementById("input-container");
-const countdownForm = document.getElementById("countdownForm");
-const dateElem = document.getElementById("date-picker");
+const inputContainer = document.getElementById(
+  "input-container"
+)! as HTMLElement;
+const countdownForm = document.getElementById(
+  "countdownForm"
+)! as HTMLFormElement;
+const dateElem = document.getElementById("date-picker")! as HTMLInputElement;
 
-const countdownElem = document.getElementById("countdown");
-const countdownElemTitle = document.getElementById("countdown-title");
-const countdownBtn = document.getElementById("countdown-button");
-const timeElements = document.querySelectorAll("span");
+const countdownElem = document.getElementById("countdown")! as HTMLElement;
+const countdownElemTitle = document.getElementById(
+  "countdown-title"
+)! as HTMLElement;
+const countdownBtn = document.getElementById(
+  "countdown-button"
+)! as HTMLButtonElement;
+const timeElements = document.querySelectorAll("span")!;
 
-const completeElem = document.getElementById("complete");
-const completeElemInfo = document.getElementById("complete-info");
-const completeBtn = document.getElementById("complete-button");
+const completeElem = document.getElementById("complete")! as HTMLElement;
+const completeElemInfo = document.getElementById(
+  "complete-info"
+)! as HTMLElement;
+const completeBtn = document.getElementById(
+  "complete-button"
+)! as HTMLButtonElement;
 
-// VARIABLES
-let countdownTitle = "";
-let countdownDate = "";
-let countdownValue = Date;
-let countdownActive;
-let savedCountdown;
+interface savedCountdownObj {
+  title: string;
+  date: string;
+}
+
+let countdownTitle: string = "";
+let countdownDate: string = "";
+let countdownValue: number;
+let countdownActive: number;
+let savedCountdown: savedCountdownObj;
 
 const second = 1000; // 1 second = 1000 millisecs
 const minute = second * 60; // get minutes ins millisecs
 const hour = minute * 60;
 const day = hour * 24;
-
-// ---------------------------------
 
 // Set date input minimum to today's date
 const today = new Date().toISOString().split("T")[0];
@@ -72,7 +86,7 @@ const updateDom = () => {
 };
 
 // values from form
-const updateCountdown = (e) => {
+const updateCountdown = (e: any) => {
   e.preventDefault();
   countdownTitle = e.srcElement[0].value;
   countdownDate = e.srcElement[1].value;
@@ -93,7 +107,6 @@ const updateCountdown = (e) => {
   }
 };
 
-// reset timer
 const reset = () => {
   // hide countdowns and show form
   countdownElem.hidden = true;
@@ -112,7 +125,7 @@ const reset = () => {
 const restorePreviousCountdown = () => {
   if (localStorage.getItem("countdown")) {
     inputContainer.hidden = true;
-    savedCountdown = JSON.parse(localStorage.getItem("countdown"));
+    savedCountdown = JSON.parse(localStorage.getItem("countdown") || "");
     countdownTitle = savedCountdown.title;
     countdownDate = savedCountdown.date;
     countdownValue = new Date(countdownDate).getTime();
